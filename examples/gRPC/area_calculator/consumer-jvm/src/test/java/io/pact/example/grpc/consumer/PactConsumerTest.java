@@ -31,14 +31,14 @@ import static org.hamcrest.Matchers.equalTo;
  * Main test class for the AreaCalculator calculate service method call.
  */
 @ExtendWith(PactConsumerTestExt.class)
-@PactTestFor(providerName = "area-calculator-provider", providerType = ProviderType.SYNCH_MESSAGE, pactVersion = PactSpecVersion.V4)
+@PactTestFor(providerName = "pactflow-example-provider-jvm-grpc-areacalc", providerType = ProviderType.SYNCH_MESSAGE, pactVersion = PactSpecVersion.V4)
 public class PactConsumerTest {
 
   /**
    * Configures the Pact interaction for the test. This will load the Protobuf plugin, which will provide all the
    * Protobuf and gRPC support to the Pact framework.
    */
-  @Pact(consumer = "protobuf-consumer")
+  @Pact(consumer = "pactflow-example-consumer-jvm-grpc-areacalc")
   V4Pact calculateRectangleArea(PactBuilder builder) {
     return builder
       // Tell Pact we need the Protobuf plugin
