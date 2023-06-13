@@ -59,3 +59,11 @@ tempdir = "0.3.7"
 
 [build-dependencies]
 tonic-build = "0.9.0"
+
+[profile.release]
+# https://github.com/johnthagen/min-sized-rust
+strip = true  # Automatically strip symbols from the binary.
+opt-level = "z"  # Optimize for size.
+codegen-units = 1
+panic = "abort"
+lto = true

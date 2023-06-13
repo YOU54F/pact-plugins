@@ -857,6 +857,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d2fabcfbdc87f4758337ca535fb41a6d701b65693ce38287d856d1674551ec9b"
 
 [[package]]
+name = "gregorian"
+version = "0.2.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "18888aec42cda8438d991d59b05e5ffa1a9799b1df634346672b1fac7eb02354"
+dependencies = [
+ "libc",
+]
+
+[[package]]
 name = "h2"
 version = "0.3.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1524,7 +1533,7 @@ dependencies = [
 
 [[package]]
 name = "pact-plugin-driver"
-version = "0.4.2"
+version = "0.4.5"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -1563,9 +1572,9 @@ dependencies = [
 
 [[package]]
 name = "pact_models"
-version = "1.0.12"
+version = "1.1.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "61081bc2f623c8b2fc9bc3749b565d84230eaede6aeaa732e821f7c4560f69e2"
+checksum = "82c16fa4275ddc04f4f076c960738bf0d0d1cff5e8a2730fbf3f9b6c94238224"
 dependencies = [
  "anyhow",
  "ariadne",
@@ -1574,6 +1583,7 @@ dependencies = [
  "chrono",
  "chrono-tz",
  "fs2",
+ "gregorian",
  "hashers",
  "hex",
  "indextree",
