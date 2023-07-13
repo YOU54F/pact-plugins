@@ -18,11 +18,11 @@ case "$1" in
             openssl dgst -sha256 -r target/artifacts/pact-csv-plugin-linux-x86_64.gz > target/artifacts/pact-csv-plugin-linux-x86_64.gz.sha256
             cp pact-plugin.json target/artifacts/
             # as per pact-protobuf-plugin
-            rustup toolchain install 1.69
-            cargo install cross
-            rustup run 1.69 cross build --target aarch64-unknown-linux-gnu --release
+            # rustup toolchain install 1.69
             # cargo install cross
-            # cross build --target aarch64-unknown-linux-gnu --release
+            # rustup run 1.69 cross build --target aarch64-unknown-linux-gnu --release
+            cargo install cross
+            cross build --target aarch64-unknown-linux-gnu --release
             gzip -c target/aarch64-unknown-linux-gnu/release/pact-csv-plugin > target/artifacts/pact-csv-plugin-linux-aarch64.gz
             openssl dgst -sha256 -r target/artifacts/pact-csv-plugin-linux-aarch64.gz > target/artifacts/pact-csv-plugin-linux-aarch64.gz.sha256
             ;;
