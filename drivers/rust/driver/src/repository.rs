@@ -218,13 +218,13 @@ fn load_local_index() -> anyhow::Result<PluginRepositoryIndex> {
 
 async fn fetch_index_from_github(http_client: &Client) -> anyhow::Result<PluginRepositoryIndex> {
   info!("Fetching index from github");
-  let index_contents = http_client.get("https://raw.githubusercontent.com/pact-foundation/pact-plugins/main/repository/repository.index")
+  let index_contents = http_client.get("https://raw.githubusercontent.com/you54f/pact-plugins/main/repository/repository.index")
     .send()
     .await?
     .text()
     .await?;
 
-  let index_sha = http_client.get("https://raw.githubusercontent.com/pact-foundation/pact-plugins/main/repository/repository.index.sha256")
+  let index_sha = http_client.get("https://raw.githubusercontent.com/you54f/pact-plugins/main/repository/repository.index.sha256")
     .send()
     .await?
     .text()

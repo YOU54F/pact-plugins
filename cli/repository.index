@@ -4,14 +4,14 @@ timestamp = "2023-03-10T05:36:45.725083896Z"
 
 [entries.protobuf]
 name = "protobuf"
-latest_version = "0.3.7"
+latest_version = "0.3.14"
 
 [[entries.protobuf.versions]]
-version = "0.3.0"
+version = "0.3.14"
 
 [entries.protobuf.versions.source]
 type = "GitHubRelease"
-value = "https://github.com/pactflow/pact-protobuf-plugin/releases/tag/v-0.3.0"
+value = "https://github.com/you54f/pact-protobuf-plugin/releases/tag/v-0.3.14"
 
 [entries.protobuf.versions.manifest]
 pluginInterfaceVersion = 1
