@@ -223,12 +223,12 @@ open class DefaultRepository: Repository, KLogging() {
     logger.info { "Fetching index from github" }
     try {
       val indexContent =
-        getUrl("https://raw.githubusercontent.com/pact-foundation/pact-plugins/main/repository/repository.index")
+        getUrl("https://raw.githubusercontent.com/you54f/pact-plugins/main/repository/repository.index")
           .execute()
           .returnContent()
           .asString()
       val indexSha =
-        getUrl("https://raw.githubusercontent.com/pact-foundation/pact-plugins/main/repository/repository.index.sha256")
+        getUrl("https://raw.githubusercontent.com/you54f/pact-plugins/main/repository/repository.index.sha256")
           .execute()
           .returnContent()
           .asString()
