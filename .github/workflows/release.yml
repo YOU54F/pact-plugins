@@ -9,7 +9,7 @@ on:
       - main
   push:
     branches:
-      - musl_built_binaries
+      - feat/musl_built_binaries
   
 concurrency:
   group: release-${{ github.ref }}
