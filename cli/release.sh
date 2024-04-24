@@ -28,7 +28,7 @@ install_cross() {
 
 build_linux_x86_64() {
     install_cross
-    #cargo clean
+    cargo clean
     cross build --target=x86_64-unknown-linux-musl "${cargo_flags[@]}"
     if [[ "${cargo_flags[*]}" =~ "--release" ]]; then
         gzip_and_sum \
@@ -40,7 +40,7 @@ build_linux_x86_64() {
 
 build_linux_aarch64() {
     install_cross
-    #cargo clean
+    cargo clean
     cross build --target=aarch64-unknown-linux-musl "${cargo_flags[@]}"
 
     if [[ "${cargo_flags[*]}" =~ "--release" ]]; then
