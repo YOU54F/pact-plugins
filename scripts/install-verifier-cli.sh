@@ -3,7 +3,7 @@
 set -e
 set -x
 
-VERSION="1.1.1"
+VERSION="0.9.20"
 
 mkdir -p ~/.pact/bin
 case "$(uname -s)" in
