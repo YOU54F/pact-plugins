@@ -3,7 +3,7 @@ module test_enums/consumer
 go 1.18
 
 require (
-	github.com/golang/protobuf v1.5.2 // indirect
+	github.com/golang/protobuf v1.5.2
 	github.com/pact-foundation/pact-go/v2 v2.0.0-beta.14.0.20220821133132-63f276fae621
 	google.golang.org/grpc v1.46.2
 )

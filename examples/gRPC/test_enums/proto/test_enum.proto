@@ -19,6 +19,7 @@ package routeguide.v2;
 option go_package = "io.pact/test_enum";
 
 import "enum.proto";
+import "enum2.proto";
 
 // Points are represented as latitude-longitude pairs in the E7 representation
 // (degrees multiplied by 10**7 and rounded to the nearest integer).
@@ -33,7 +34,7 @@ message Point {
 //
 // If a feature could not be named, the name is empty.
 message Feature {
-  routeguide.other.OtherFileEnum result = 1;
+  routeguide.other2.OtherFileEnum2 result = 1;
 }
 
 // Interface exported by the server.

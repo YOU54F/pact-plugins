@@ -22,20 +22,21 @@ func TestEnumClient(t *testing.T) {
 
 	dir, _ := filepath.Abs("../proto/test_enum.proto")
 	additionalDir, _ := filepath.Abs("../proto2")
+	additionalDir2, _ := filepath.Abs("../proto3")
 
 	grpcInteraction := `{
 		"pact:proto": "` + filepath.ToSlash(dir) + `",
 		"pact:proto-service": "Test/GetFeature2",
 		"pact:content-type": "application/protobuf",
 		"pact:protobuf-config": {
-          	"additionalIncludes": ["` + filepath.ToSlash(additionalDir) + `"]
+          	"additionalIncludes": ["` + filepath.ToSlash(additionalDir) + `","` + filepath.ToSlash(additionalDir2) + `"]
 		},
 		"request": {
 			"latitude": "matching(number, 3)",
 			"longitude": "matching(number, 4)"
 		},
 		"response": {
-			"result": "matching(type, 'VALUE_ONE')"
+			"result": "matching(type, 'VALUE_ONE_1')"
 		}
 	}`
 
