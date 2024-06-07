@@ -62,3 +62,6 @@ test-log = "0.2.15"
 
 [build-dependencies]
 tonic-build = "0.11.0"
+
+[patch.crates-io]
+pact_models = { version="~1.2.0", git = "https://github.com/you54f/pact-reference", branch="fix/logging_align_tracing_libs", default-features = false }

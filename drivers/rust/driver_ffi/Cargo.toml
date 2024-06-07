@@ -19,3 +19,4 @@ tonic = "0.11.0"
 
 [patch.crates-io]
 pact_ffi = { git = 'https://github.com/pact-foundation/pact-reference.git' }
+pact_models = { version="~1.2.0", git = "https://github.com/you54f/pact-reference", branch="fix/logging_align_tracing_libs", default-features = false }
