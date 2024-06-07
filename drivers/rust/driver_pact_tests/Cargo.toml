@@ -19,4 +19,6 @@ async-trait = "0.1.74"
 test-log = "0.2.14"
 
 [patch.crates-io]
-pact_consumer = { git = 'https://github.com/pact-foundation/pact-reference.git' }
+# pact_consumer = { git = 'https://github.com/pact-foundation/pact-reference.git' }
+pact_models = { git = 'https://github.com/you54f/pact-reference.git', branch = "fix_logging" }
+pact_consumer = { git = 'https://github.com/you54f/pact-reference.git', branch = "fix_logging"  }
