@@ -1465,7 +1465,7 @@ dependencies = [
 [[package]]
 name = "pact_models"
 version = "1.2.1"
-source = "git+https://github.com/you54f/pact-reference.git?branch=fix_logging#f2908b20c365c001f696d4e4ab5f38482555bc00"
+source = "git+https://github.com/you54f/pact-reference.git?branch=fix_logging#613628f45baf9d1823e5ded573166d41b96426d6"
 dependencies = [
  "anyhow",
  "ariadne",
