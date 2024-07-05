@@ -3,6 +3,8 @@
 pub mod plugin_models;
 pub mod plugin_manager;
 #[cfg(not(windows))]
+mod signal_handler;
+#[cfg(not(windows))]
 mod child_process;
 #[cfg(windows)]
 mod child_process_windows;
