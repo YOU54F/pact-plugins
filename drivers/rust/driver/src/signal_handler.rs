@@ -26,26 +26,26 @@ pub mod signal_handler {
             fix_signal(libc::SIGTSTP).unwrap();
             debug!("Fixing signal for signal - SIGCHLD: {}", libc::SIGCHLD);
             fix_signal(libc::SIGCHLD).unwrap();
-            // debug!("Fixing signal for signal - SIGHUP: {}", libc::SIGHUP);
-            // fix_signal(libc::SIGHUP).unwrap();
-            // debug!("Fixing signal for signal - SIGINT: {}", libc::SIGINT);
-            // fix_signal(libc::SIGINT).unwrap();
-            // debug!("Fixing signal for signal - SIGQUIT: {}", libc::SIGQUIT);
-            // fix_signal(libc::SIGQUIT).unwrap();
-            // debug!("Fixing signal for signal - SIGABRT: {}", libc::SIGABRT);
-            // fix_signal(libc::SIGABRT).unwrap();
-            // debug!("Fixing signal for signal - SIGFPE: {}", libc::SIGFPE);
-            // fix_signal(libc::SIGFPE).unwrap();
-            // debug!("Fixing signal for signal - SIGTERM: {}", libc::SIGTERM);
-            // fix_signal(libc::SIGTERM).unwrap();
-            // debug!("Fixing signal for signal - SIGBUS: {}", libc::SIGBUS);
-            // fix_signal(libc::SIGBUS).unwrap();
-            // debug!("Fixing signal for signal - SIGSEGV: {}", libc::SIGSEGV);
-            // fix_signal(libc::SIGSEGV).unwrap();
-            // debug!("Fixing signal for signal - SIGXCPU: {}", libc::SIGXCPU);
-            // fix_signal(libc::SIGXCPU).unwrap();
-            // debug!("Fixing signal for signal - SIGXFSZ: {}", libc::SIGXFSZ);
-            // fix_signal(libc::SIGXFSZ).unwrap();
+            debug!("Fixing signal for signal - SIGHUP: {}", libc::SIGHUP);
+            fix_signal(libc::SIGHUP).unwrap();
+            debug!("Fixing signal for signal - SIGINT: {}", libc::SIGINT);
+            fix_signal(libc::SIGINT).unwrap();
+            debug!("Fixing signal for signal - SIGQUIT: {}", libc::SIGQUIT);
+            fix_signal(libc::SIGQUIT).unwrap();
+            debug!("Fixing signal for signal - SIGABRT: {}", libc::SIGABRT);
+            fix_signal(libc::SIGABRT).unwrap();
+            debug!("Fixing signal for signal - SIGFPE: {}", libc::SIGFPE);
+            fix_signal(libc::SIGFPE).unwrap();
+            debug!("Fixing signal for signal - SIGTERM: {}", libc::SIGTERM);
+            fix_signal(libc::SIGTERM).unwrap();
+            debug!("Fixing signal for signal - SIGBUS: {}", libc::SIGBUS);
+            fix_signal(libc::SIGBUS).unwrap();
+            debug!("Fixing signal for signal - SIGSEGV: {}", libc::SIGSEGV);
+            fix_signal(libc::SIGSEGV).unwrap();
+            debug!("Fixing signal for signal - SIGXCPU: {}", libc::SIGXCPU);
+            fix_signal(libc::SIGXCPU).unwrap();
+            debug!("Fixing signal for signal - SIGXFSZ: {}", libc::SIGXFSZ);
+            fix_signal(libc::SIGXFSZ).unwrap();
 
         }
     }
