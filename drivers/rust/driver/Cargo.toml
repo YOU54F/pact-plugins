@@ -53,6 +53,7 @@ tracing = { version = "0.1.40", features = [ "log" ] }  # This needs to be the s
 tracing-core = "0.1.32"  # This needs to be the same version across all the pact libs (i.e. pact ffi)
 uuid = { version = "1.8.0", features = ["v4"] }
 zip = "0.6.6"
+libc = "0.2.151"
 
 [dev-dependencies]
 env_logger = "0.11.3"

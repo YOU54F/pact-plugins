@@ -1436,6 +1436,7 @@ dependencies = [
  "indicatif",
  "itertools 0.12.1",
  "lazy_static",
+ "libc",
  "log",
  "maplit",
  "md5",
