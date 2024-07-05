@@ -217,10 +217,13 @@ async fn initialise_plugin(
     "exec" => {
       let mut plugin = start_plugin_process(manifest).await?;
       debug!("Plugin process started OK (port = {}), sending init message", plugin.port());
+      
+      #[cfg(not(target_os = "windows"))]
       if env::var("PACT_CORE_PLUGINS_SIGNAL_HANDLERS").unwrap_or_default() == "1" {
           debug!("Installing signal handlers in initialise_plugin");
           install_signal_handlers();
       }
+
       init_handshake(manifest, &mut plugin).await.map_err(|err| {
         plugin.kill();
         anyhow!("Failed to send init request to the plugin - {}", err)
@@ -472,10 +475,13 @@ pub async fn start_mock_server_v2(
   };
   let response = plugin.start_mock_server(request).await?;
   debug!("Got response ${response:?}");
+
+  #[cfg(not(target_os = "windows"))]
   if env::var("PACT_CORE_PLUGINS_SIGNAL_HANDLERS").unwrap_or_default() == "1" {
     debug!("Installing signal handlers in start_mock_server_v2");
     install_signal_handlers();
-}
+  }
+  
   let mock_server_response = response.response
     .ok_or_else(|| anyhow!("Did not get a valid response from the start mock server call"))?;
   match mock_server_response {
