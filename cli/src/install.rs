@@ -104,13 +104,17 @@ async fn install_plugin_from_url(
         download_plugin_executable(&manifest, &plugin_dir, &http_client, url, &tag, true).await?;
 
         env::set_var("pact_do_not_track", "true");
-        load_plugin(&manifest.as_dependency())
+        if env::var("PACT_PLUGIN_CLI_SKIP_LOAD").unwrap_or_default() != "1" {
+            load_plugin(&manifest.as_dependency())
           .await
           .and_then(|plugin| {
-            println!("Installed plugin {} version {} OK", manifest.name, manifest.version);
-            plugin.kill();
-            Ok(())
-          })
+              println!("Installed plugin {} version {} OK", manifest.name, manifest.version);
+              plugin.kill();
+              Ok(())
+          }) }
+          else {
+            return Ok(())
+          }
       } else {
         println!("Skipping installing plugin {} version {} as it is already installed", manifest.name, manifest.version);
         Ok(())

@@ -6,7 +6,7 @@ use std::fs::File;
 use std::io::{BufReader, Write};
 use std::path::PathBuf;
 use std::process::Stdio;
-#[cfg(windows)] use std::process::Command;
+use std::process::Command;
 use std::str::from_utf8;
 use std::str::FromStr;
 use std::sync::Mutex;
@@ -18,8 +18,7 @@ use itertools::Either;
 use lazy_static::lazy_static;
 use log::max_level;
 use maplit::hashmap;
-#[cfg(not(windows))] use os_info::Type;
-#[cfg(not(windows))] use crate::signal_handler::signal_handler::install_signal_handlers;
+use os_info::Type;
 use pact_models::bodies::OptionalBody;
 use pact_models::json_utils::json_to_string;
 use pact_models::PactSpecification;
@@ -30,13 +29,10 @@ use reqwest::Client;
 use semver::Version;
 use serde_json::Value;
 use sysinfo::{Pid,System};
-#[cfg(not(windows))] use sysinfo::Signal;
-#[cfg(not(windows))] use tokio::process::Command;
 use tracing::{debug, info, trace, warn};
 
 use crate::catalogue_manager::{all_entries, CatalogueEntry, register_plugin_entries, remove_plugin_entries};
-#[cfg(not(windows))] use crate::child_process::ChildPluginProcess;
-#[cfg(windows)] use crate::child_process_windows::ChildPluginProcess;
+use crate::child_process::ChildPluginProcess;
 use crate::content::ContentMismatch;
 use crate::download::{download_json_from_github, download_plugin_executable, fetch_json_from_url};
 use crate::metrics::send_metrics;
@@ -218,12 +214,6 @@ async fn initialise_plugin(
       let mut plugin = start_plugin_process(manifest).await?;
       debug!("Plugin process started OK (port = {}), sending init message", plugin.port());
       
-      #[cfg(not(target_os = "windows"))]
-      if env::var("PACT_CORE_PLUGINS_SIGNAL_HANDLERS").unwrap_or_default() == "1" {
-          debug!("Installing signal handlers in initialise_plugin");
-          install_signal_handlers();
-      }
-
       init_handshake(manifest, &mut plugin).await.map_err(|err| {
         plugin.kill();
         anyhow!("Failed to send init request to the plugin - {}", err)
@@ -251,7 +241,61 @@ pub async fn init_handshake(manifest: &PactPluginManifest, plugin: &mut (dyn Pac
   Ok(())
 }
 
-#[cfg(not(windows))]
+// #[cfg(not(windows))]
+// async fn start_plugin_process(manifest: &PactPluginManifest) -> anyhow::Result<PactPlugin> {
+//   debug!("Starting plugin with manifest {:?}", manifest);
+
+//   let os_info = os_info::get();
+//   debug!("Detected OS: {}", os_info);
+//   let mut path = if let Some(entry_point) = manifest.entry_points.get(&os_info.to_string()) {
+//     PathBuf::from(entry_point)
+//   } else if os_info.os_type() == Type::Windows && manifest.entry_points.contains_key("windows") {
+//     PathBuf::from(manifest.entry_points.get("windows").unwrap())
+//   } else {
+//     PathBuf::from(&manifest.entry_point)
+//   };
+
+//   if !path.is_absolute() || !path.exists() {
+//     path = PathBuf::from(manifest.plugin_dir.clone()).join(path);
+//   }
+//   debug!("Starting plugin using {:?}", &path);
+
+//   let log_level = max_level();
+//   let mut child_command = Command::new(path.clone());
+//   let mut child_command = child_command
+//     .env("LOG_LEVEL", log_level.to_string())
+//     .env("RUST_LOG", log_level.to_string())
+//     .current_dir(manifest.plugin_dir.clone());
+
+//   if let Some(args) = &manifest.args {
+//     child_command = child_command.args(args);
+//   }
+
+//   let child = child_command
+//     .stdout(Stdio::piped())
+//     .stderr(Stdio::piped())
+//     .spawn()
+//     .map_err(|err| anyhow!("Was not able to start plugin process for '{}' - {}",
+//       path.to_string_lossy(), err))?;
+//   let child_pid = child.id().unwrap_or_default();
+//   debug!("Plugin {} started with PID {}", manifest.name, child_pid);
+
+//   match ChildPluginProcess::new(child, manifest).await {
+//     Ok(child) => Ok(PactPlugin::new(manifest, child)),
+//     Err(err) => {
+//       let mut s = System::new();
+//       s.refresh_processes();
+//       if let Some(process) = s.process(Pid::from_u32(child_pid)) {
+//         process.kill();
+//       } else {
+//         warn!("Child process with PID {} was not found", child_pid);
+//       }
+//       Err(err)
+//     }
+//   }
+// }
+
+// #[cfg(windows)]
 async fn start_plugin_process(manifest: &PactPluginManifest) -> anyhow::Result<PactPlugin> {
   debug!("Starting plugin with manifest {:?}", manifest);
 
@@ -261,56 +305,6 @@ async fn start_plugin_process(manifest: &PactPluginManifest) -> anyhow::Result<P
     PathBuf::from(entry_point)
   } else if os_info.os_type() == Type::Windows && manifest.entry_points.contains_key("windows") {
     PathBuf::from(manifest.entry_points.get("windows").unwrap())
-  } else {
-    PathBuf::from(&manifest.entry_point)
-  };
-
-  if !path.is_absolute() || !path.exists() {
-    path = PathBuf::from(manifest.plugin_dir.clone()).join(path);
-  }
-  debug!("Starting plugin using {:?}", &path);
-
-  let log_level = max_level();
-  let mut child_command = Command::new(path.clone());
-  let mut child_command = child_command
-    .env("LOG_LEVEL", log_level.to_string())
-    .env("RUST_LOG", log_level.to_string())
-    .current_dir(manifest.plugin_dir.clone());
-
-  if let Some(args) = &manifest.args {
-    child_command = child_command.args(args);
-  }
-
-  let child = child_command
-    .stdout(Stdio::piped())
-    .stderr(Stdio::piped())
-    .spawn()
-    .map_err(|err| anyhow!("Was not able to start plugin process for '{}' - {}",
-      path.to_string_lossy(), err))?;
-  let child_pid = child.id().unwrap_or_default();
-  debug!("Plugin {} started with PID {}", manifest.name, child_pid);
-
-  match ChildPluginProcess::new(child, manifest).await {
-    Ok(child) => Ok(PactPlugin::new(manifest, child)),
-    Err(err) => {
-      let mut s = System::new();
-      s.refresh_processes();
-      if let Some(process) = s.process(Pid::from_u32(child_pid)) {
-        process.kill();
-      } else {
-        warn!("Child process with PID {} was not found", child_pid);
-      }
-      Err(err)
-    }
-  }
-}
-
-#[cfg(windows)]
-async fn start_plugin_process(manifest: &PactPluginManifest) -> anyhow::Result<PactPlugin> {
-  debug!("Starting plugin with manifest {:?}", manifest);
-
-  let mut path = if let Some(entry) = manifest.entry_points.get("windows") {
-    PathBuf::from(entry)
   } else {
     PathBuf::from(&manifest.entry_point)
   };
@@ -475,12 +469,6 @@ pub async fn start_mock_server_v2(
   };
   let response = plugin.start_mock_server(request).await?;
   debug!("Got response ${response:?}");
-
-  #[cfg(not(target_os = "windows"))]
-  if env::var("PACT_CORE_PLUGINS_SIGNAL_HANDLERS").unwrap_or_default() == "1" {
-    debug!("Installing signal handlers in start_mock_server_v2");
-    install_signal_handlers();
-  }
   
   let mock_server_response = response.response
     .ok_or_else(|| anyhow!("Did not get a valid response from the start mock server call"))?;
