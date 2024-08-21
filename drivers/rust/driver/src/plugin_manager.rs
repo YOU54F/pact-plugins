@@ -28,7 +28,7 @@ use pact_models::v4::interaction::V4Interaction;
 use reqwest::Client;
 use semver::Version;
 use serde_json::Value;
-use sysinfo::{Pid,System};
+use sysinfo::{ProcessesToUpdate, Pid, System};
 #[cfg(not(windows))] use sysinfo::Signal;
 #[cfg(not(windows))] use tokio::process::Command;
 use tracing::{debug, info, trace, warn};
@@ -246,6 +246,7 @@ pub async fn init_handshake(manifest: &PactPluginManifest, plugin: &mut (dyn Pac
 
 #[cfg(not(windows))]
 async fn start_plugin_process(manifest: &PactPluginManifest) -> anyhow::Result<PactPlugin> {
+
   debug!("Starting plugin with manifest {:?}", manifest);
 
   let os_info = os_info::get();
@@ -287,7 +288,7 @@ async fn start_plugin_process(manifest: &PactPluginManifest) -> anyhow::Result<P
     Ok(child) => Ok(PactPlugin::new(manifest, child)),
     Err(err) => {
       let mut s = System::new();
-      s.refresh_processes();
+      s.refresh_processes(ProcessesToUpdate::All);
       if let Some(process) = s.process(Pid::from_u32(child_pid)) {
         process.kill_with(Signal::Term);
       } else {
@@ -336,7 +337,7 @@ async fn start_plugin_process(manifest: &PactPluginManifest) -> anyhow::Result<P
     Ok(child) => Ok(PactPlugin::new(manifest, child)),
     Err(err) => {
       let mut s = System::new();
-      s.refresh_processes();
+      s.refresh_processes(ProcessesToUpdate::All);
       if let Some(process) = s.process(Pid::from_u32(child_pid)) {
         process.kill();
       } else {

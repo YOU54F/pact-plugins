@@ -65,4 +65,4 @@ tonic-build = "0.12.0"
 
 [patch.crates-io]
 # Waiting on the next release of Onig crate
-sysinfo = { git = "https://github.com/you54f/sysinfo", default-features = false, branch = "feat/windows_tree_kill" }
+sysinfo = { git = "https://github.com/you54f/sysinfo", branch = "feat/windows_tree_kill" }

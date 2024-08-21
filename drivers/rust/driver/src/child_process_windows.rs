@@ -9,7 +9,7 @@ use std::time::Duration;
 
 use anyhow::anyhow;
 use serde::{Deserialize, Serialize};
-use sysinfo::{Pid, System};
+use sysinfo::{Pid, ProcessesToUpdate, System};
 use tracing::{debug, error, trace, warn};
 
 use crate::plugin_models::PactPluginManifest;
@@ -116,7 +116,7 @@ impl ChildPluginProcess {
   /// Kill the running plugin process
   pub fn kill(&self) {
     let mut s = System::new();
-    s.refresh_processes();
+    s.refresh_processes(ProcessesToUpdate::All);
     if let Some(process) = s.process(Pid::from_u32(self.child_pid as u32)) {
       process.kill();
     } else {

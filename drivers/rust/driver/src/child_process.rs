@@ -5,7 +5,7 @@ use std::time::Duration;
 
 use anyhow::anyhow;
 use serde::{Deserialize, Serialize};
-use sysinfo::{Pid, Signal, System};
+use sysinfo::{Pid, ProcessesToUpdate, Signal, System};
 use tokio::io::{AsyncBufReadExt, BufReader};
 use tokio::process::Child;
 use tracing::{debug, error, trace, warn};
@@ -109,7 +109,7 @@ impl ChildPluginProcess {
   /// Kill the running plugin process
   pub fn kill(&self) {
     let mut s = System::new();
-    s.refresh_processes();
+    s.refresh_processes(ProcessesToUpdate::All);
     if let Some(process) = s.process(Pid::from_u32(self.child_pid as u32)) {
       process.kill_with(Signal::Term);
     } else {
