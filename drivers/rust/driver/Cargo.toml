@@ -44,7 +44,7 @@ semver = "1.0.23"
 serde_json = "1.0.120"
 serde = { version = "1.0.204",  features = ["derive"] }
 sha2 = "0.10.8"
-sysinfo = "0.30.13"
+sysinfo = "0.31.2"
 tar = "0.4.41"
 toml = "0.8.14"
 tokio = { version = "1.38.0", features = ["full"] }
@@ -62,3 +62,7 @@ test-log = "0.2.16"
 
 [build-dependencies]
 tonic-build = "0.12.0"
+
+[patch.crates-io]
+# Waiting on the next release of Onig crate
+sysinfo = { git = "https://github.com/you54f/sysinfo", default-features = false, branch = "feat/windows_tree_kill" }
