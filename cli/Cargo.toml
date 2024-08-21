@@ -1,6 +1,6 @@
 [package]
 name = "pact-plugin-cli"
-version = "0.1.3"
+version = "0.1.4"
 edition = "2021"
 authors = ["Ronald Holshausen <ronald.holshausen@smartbear.com>"]
 description = "CLI utility for Pact plugins"
@@ -14,8 +14,8 @@ exclude = [
 ]
 
 [dependencies]
-pact-plugin-driver = "0.6.1"
-clap = { version = "4.4.11", features = [ "derive", "cargo" ] }
+pact-plugin-driver = "0.7.0"
+clap = { version = "4.5.16", features = [ "derive", "cargo", "env" ] }
 comfy-table = "7.1.1"
 home = "0.5.9"
 anyhow = "1.0.86"
