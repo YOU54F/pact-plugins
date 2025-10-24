@@ -216,7 +216,7 @@ jobs:
         if: runner.os == 'macOS'
       - name: Install Pact Go (Linux)
         run: |
-          go install github.com/pact-foundation/pact-go/v2@2.x.x
+          go install github.com/pact-foundation/pact-go/v2
           sudo $HOME/go/bin/pact-go -l DEBUG install
           sudo chmod 644 /usr/local/lib/libpact_ffi.so
           ls -la /usr/local/lib/
@@ -224,13 +224,13 @@ jobs:
         if: runner.os == 'Linux'
       - name: Install Pact Go (OSX)
         run: |
-          go install github.com/pact-foundation/pact-go/v2@2.x.x
+          go install github.com/pact-foundation/pact-go/v2
           sudo $HOME/go/bin/pact-go -l DEBUG install
         shell: bash
         if: runner.os == 'macOS'
       - name: Install Pact Go (Windows)
         run: |
-          go install github.com/pact-foundation/pact-go/v2@2.x.x
+          go install github.com/pact-foundation/pact-go/v2
           #$HOME/go/bin/pact-go -l DEBUG install
           curl -L -o ~/.pact/pact_ffi.dll.gz https://github.com/pact-foundation/pact-reference/releases/download/libpact_ffi-v0.4.28/pact_ffi-windows-x86_64.dll.gz
           gunzip -N -f ~/.pact/pact_ffi.dll.gz
