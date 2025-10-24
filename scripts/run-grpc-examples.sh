@@ -26,7 +26,7 @@ case "$(uname -s)" in
 esac
 
 go test -c
-LOG_LEVEL=trace ./consumer.test
+LOG_LEVEL=info ./consumer.test
 
 echo '==== RUNNING provider-jvm'
 cd ../provider-jvm
