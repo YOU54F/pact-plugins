@@ -1,5 +1,40 @@
 To generate the log, run `git log --pretty='* %h - %s (%an, %ad)' TAGNAME..HEAD .` replacing TAGNAME and HEAD as appropriate.
 
+# 0.2.0 - [Feat Release]
+
+* a24141b - chore: update repository.index (Yousaf Nabi, Fri Oct 24 19:53:24 2025 +0100)
+* fdb6dbc - feat!: rename binary to pact-plugin (Yousaf Nabi, Fri Oct 24 14:15:16 2025 +0100)
+* d87cbcc - chore: rename main.rs to lib.rs to align with rust conventions (Yousaf Nabi, Wed Oct 8 23:50:53 2025 +0100)
+* 6ed9c88 - feat: cli as lib (Yousaf Nabi, Sat Sep 27 18:26:05 2025 +0100)
+* 423ab56 - bump version to 0.1.4 (Ronald Holshausen, Wed Aug 21 12:02:42 2024 +1000)
+* e606980 - update changelog for release 0.1.3 (Ronald Holshausen, Wed Aug 21 12:01:33 2024 +1000)
+* 37a0610 - chore: update repository.index (Ronald Holshausen, Wed Aug 21 12:00:29 2024 +1000)
+* 3e7e007 - chore(plugin-cli): Upgrade dependencies (Ronald Holshausen, Wed Aug 21 11:58:40 2024 +1000)
+* 9dc6d01 - feat(cli): support PACT_PLUGIN_CLI_SKIP_LOAD (Yousaf Nabi, Wed Jul 17 23:37:57 2024 +0100)
+* 16c6f30 - fix(CLI): use the published version of the driver crate (Ronald Holshausen, Tue Jul 16 12:01:11 2024 +1000)
+* 08c7594 - chore(cli): point to local pact-plugin-driver (Yousaf Nabi, Fri Jul 5 01:07:47 2024 +0100)
+* fa6ef38 - deps(cli): update deps (Yousaf Nabi, Thu Jul 4 23:15:40 2024 +0100)
+* 7c2e691 - docs(chore): pact-plugin-cli 0.0.4 added linux aarch64 target (Yousaf Nabi, Mon May 20 13:27:52 2024 +0100)
+* 2a962be - docs(chore): add binary compat table (csv/plugin-cli) (Yousaf Nabi, Mon May 20 13:25:41 2024 +0100)
+* 1f3ac8c - bump version to 0.1.1 (pact-plugin-cli) (Yousaf Nabi, Fri May 10 15:21:06 2024 +0100)
+* 501ac96 - update changelog for release 0.1.2 (Yousaf Nabi, Fri May 10 14:53:07 2024 +0100)
+* cd8a64a - chore: update repository.index (Yousaf Nabi, Fri May 10 14:52:15 2024 +0100)
+* 18dbf5c - feat: reduce executable size (Yousaf Nabi, Fri Apr 26 15:46:58 2024 +0100)
+* 20c8dae - feat: linux musl static bins / windows aarch64 (Yousaf Nabi, Thu Apr 25 19:26:03 2024 +0100)
+* 53cc657 - chore: fix build after updating version (Ronald Holshausen, Sat Jan 20 08:15:55 2024 +1100)
+* 8718c9e - chore: fix build after updating version (Ronald Holshausen, Sat Jan 20 08:14:36 2024 +1100)
+* 710f70a - bump version to 0.1.2 (Ronald Holshausen, Thu Dec 14 10:36:50 2023 +1100)
+* a2a4905 - update changelog for release 0.1.1 (Ronald Holshausen, Thu Dec 14 10:34:45 2023 +1100)
+* f5d40d1 - chore: update repository.index (Ronald Holshausen, Thu Dec 14 10:34:21 2023 +1100)
+* 45866c1 - chore: Upgrade dependencies (Ronald Holshausen, Thu Dec 14 10:21:16 2023 +1100)
+* dd3359c - feat: support tgz for bundled plugins (Yousaf Nabi, Thu Dec 7 16:09:31 2023 +0000)
+* 20a925c - fix(cli): --skip-if-installed always skipped (Matt Fellows, Tue Oct 3 12:18:13 2023 +1100)
+* a01455d - fix: only display download progress bar when invoked from CLI (Ronald Holshausen, Tue Apr 18 10:46:58 2023 +1000)
+* f6706d6 - refactor: Move all code to download plugins to the driver to support auto-installing known plugins (Ronald Holshausen, Mon Apr 17 15:57:31 2023 +1000)
+* 6ed7c4d - refactor: Move plugin repository models to the plugin driver (Ronald Holshausen, Mon Apr 3 11:27:14 2023 +1000)
+* a282599 - bump version to 0.1.1 (Ronald Holshausen, Mon Mar 20 18:00:59 2023 +1100)
+* 1456eef - chore: update release script (Ronald Holshausen, Mon Mar 20 17:59:30 2023 +1100)
+
 # 0.1.3 - Adds PACT_PLUGIN_CLI_SKIP_LOAD support + linux aarch64 target
 
 * 37a0610 - chore: update repository.index (Ronald Holshausen, Wed Aug 21 12:00:29 2024 +1000)
