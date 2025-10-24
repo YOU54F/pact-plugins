@@ -1,6 +1,6 @@
 module area_calculator/consumer
 
-go 1.21
+go 1.23
 
 require (
 	github.com/pact-foundation/pact-go/v2 v2.4.1
