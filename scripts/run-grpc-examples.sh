@@ -35,7 +35,7 @@ cp ../consumer-rust/target/pacts/* server/src/test/resources/pacts
 cp ../consumer-go/pacts/* server/src/test/resources/pacts
 ./gradlew check
 
-echo '==== RUNNING consumer-go'
+echo '==== RUNNING provider-go'
 cd ../provider-go
 go build provider.go
 nohup ./provider > provider.go.out 2>&1 &
