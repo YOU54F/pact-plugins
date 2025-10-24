@@ -53,7 +53,7 @@ lto = true
 
 # create bin and lib entries
 [[bin]]
-name = "pact-plugin-cli"
+name = "pact-plugin"
 path = "src/bin.rs"
 [lib]
 name = "pact_plugin_cli"
